@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* ─── GTM India Design Tokens ───────────────────────────────────────────────
+   Placeholder palette - replace once brand colours are confirmed.
+   Structure mirrors GTMSolutions for easy cross-project reference.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Neutrals */
+  --color-white:       #FFFFFF;
+  --color-lightest:    #ECEEEB;
+  --color-linen:       #E6E1DB;
+  --color-ink:         #1A1A1A;
+
+  /* Primary accent - placeholder: deep indigo. Swap when palette is confirmed. */
+  --color-primary:          #2D3A8C;
+  --color-primary-dark:     #1E2760;
+  --color-primary-light:    #EEF0FB;
+  --color-primary-mid:      #C5CBEE;
+
+  /* Secondary accent - placeholder: warm amber. Swap when palette is confirmed. */
+  --color-secondary:        #C47B2B;
+  --color-secondary-dark:   #9E5E1A;
+  --color-secondary-light:  #FDF3E7;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Spacing scale */
+  --section-pad-y: clamp(4rem, 8vw, 8rem);
+  --container-max: 1200px;
+  --container-pad: clamp(1.25rem, 5vw, 3rem);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-white);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
