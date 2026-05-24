@@ -263,14 +263,18 @@
    .nav__menu   { display: none; }
    
    @media (max-width: 720px) {
+     .nav__inner { padding-block: 0.9rem; }
      .nav__links { display: none; }
+     .wm { font-size: 1.2rem; }
      .nav__burger {
        display: inline-flex;
        flex-direction: column;
        gap: 5px;
        padding: 0.5rem;
+       flex-shrink: 0;
      }
      .nav__burger span {
+       display: block;
        width: 22px;
        height: 1.5px;
        background: var(--fg);
@@ -288,7 +292,7 @@
        background: var(--bg);
      }
      .nav__menu.is-open { display: flex; }
-     .nav__menu .nav__link { font-size: 1.1rem; }
+     .nav__menu .nav__link { font-size: 1.1rem; opacity: 1; }
    }
    
    /* ═══════════════════════════════════════════════════════════════════════════
@@ -398,9 +402,15 @@
      display: flex;
      justify-content: space-between;
      align-items: flex-start;
-     gap: 1.5rem;
-     flex-wrap: wrap;
-     margin-bottom: 2.5rem;
+     gap: 0.5rem;
+     flex-wrap: nowrap;
+     margin-bottom: 2rem;
+   }
+   .hero__eyebrow-row .eyebrow {
+     max-width: 48%;
+   }
+   .eyebrow--right {
+     text-align: right;
    }
    .eyebrow--right { text-align: right; }
    .hero__title {
@@ -409,9 +419,11 @@
      font-variation-settings: "opsz" 144;
      letter-spacing: -0.035em;
      line-height: 0.92;
-     font-size: clamp(3rem, 11vw, 9rem);
+     font-size: clamp(2.4rem, 10vw, 9rem);
      color: var(--fg);
      margin-bottom: 0;
+     overflow-wrap: break-word;
+     word-break: break-word;
    }
    .hero__title em { font-style: italic; color: var(--accent); font-weight: 400; }
    
@@ -442,6 +454,10 @@
      overflow: hidden;
      background: var(--color-lightest);
    }
+   @media (max-width: 600px) {
+     .hero__photo { aspect-ratio: 4 / 3; }
+     .hero__photo-wrap { margin-top: 1.5rem; }
+   }
    .hero__photo-cap {
      position: absolute;
      top: 1.25rem;
@@ -462,15 +478,15 @@
    .tag-row {
      border-block: 1px solid var(--border);
      padding-block: 1.4rem;
-     margin-top: 4rem;
+     margin-top: 3rem;
      display: flex;
      align-items: center;
      flex-wrap: wrap;
-     gap: 1.25rem 2rem;
+     gap: 0.75rem 1.25rem;
      font-family: var(--font-body);
-     font-size: 0.85rem;
+     font-size: clamp(0.7rem, 2vw, 0.85rem);
      font-weight: 500;
-     letter-spacing: 0.08em;
+     letter-spacing: 0.06em;
      text-transform: uppercase;
      color: var(--fg);
    }
@@ -517,8 +533,16 @@
    
    .next-event {
      background: var(--color-ink);
-     color: var(--fg-on-dark);
+     color: var(--color-white);
      padding-block: clamp(3.5rem, 7vw, 6rem);
+   }
+   .next-event h2,
+   .next-event h3,
+   .next-event p,
+   .next-event dt,
+   .next-event dd,
+   .next-event span:not(.event-meta__chip--community) {
+     color: var(--color-white);
    }
    .next-event__head {
      display: flex;
@@ -543,6 +567,7 @@
      letter-spacing: 0.08em;
      opacity: 0.5;
      text-transform: uppercase;
+     color: var(--color-white);
    }
    .next-event__grid {
      display: grid;
@@ -583,7 +608,7 @@
      font-family: var(--font-body);
      font-size: 1.05rem;
      line-height: 1.65;
-     color: var(--fg-on-dark-muted);
+     color: rgba(255, 255, 255, 0.7);
      max-width: 48ch;
    }
    .next-event__dl {
@@ -592,10 +617,10 @@
      gap: 0.5rem 1.25rem;
      font-family: var(--font-body);
      font-size: 0.92rem;
-     color: var(--fg-on-dark-muted);
+     color: rgba(255, 255, 255, 0.7);
    }
    .next-event__dl dt { opacity: 0.6; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.72rem; align-self: center; }
-   .next-event__dl dd { color: var(--fg-on-dark); }
+   .next-event__dl dd { color: var(--color-white); }
    .next-event__luma-link { color: var(--color-terracotta-light); text-decoration: underline; text-underline-offset: 2px; }
    .next-event__actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
    
@@ -788,9 +813,16 @@
    
    .cta-banner {
      background: var(--bg-deep);
-     color: var(--fg-on-dark);
+     color: var(--color-white);
      padding-block: clamp(4rem, 8vw, 7rem);
      overflow: hidden;
+   }
+   .cta-banner h2,
+   .cta-banner p {
+     color: var(--color-white);
+   }
+   .cta-banner__sub {
+     color: rgba(255, 255, 255, 0.7) !important;
    }
    .cta-banner__title {
      font-family: var(--font-display);

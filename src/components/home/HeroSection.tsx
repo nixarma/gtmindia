@@ -3,17 +3,12 @@ export function HeroSection() {
     <section className="hero">
       <div className="container">
         <div className="hero__eyebrow-row">
-          <p className="eyebrow">
-            An initiative by<br />GTM Solutions Consulting
-          </p>
-          <p className="eyebrow eyebrow--right">
-            Practitioner-led<br />community across India
-          </p>
+          <p className="eyebrow">An initiative by GTM Solutions Consulting</p>
+          <p className="eyebrow eyebrow--right">Practitioner-led community across India</p>
         </div>
 
         <h1 className="hero__title">
           Building India&apos;s GTM{' '}
-        
           <em>community.</em>
         </h1>
 
@@ -25,13 +20,15 @@ export function HeroSection() {
         </div>
 
         <div className="tag-row">
-          <span>Sales</span>
+          <span>Sales Engineering</span>
           <span className="plus">+</span>
-          <span>Presales / Solutions</span>
+          <span>Presales</span>
           <span className="plus">+</span>
           <span>GTM Leadership</span>
           <span className="plus">+</span>
-          <span>Product Marketing</span>
+          <span>Solutions Consulting</span>
+          <span className="plus">+</span>
+          <span>RevOps</span>
         </div>
       </div>
     </section>
