@@ -7,7 +7,7 @@ import { SmoothScrollProvider } from '@/components/ui/SmoothScrollProvider'
 
 const fraunces = Fraunces({
   subsets: ['latin'],
-  axes: ['opsz', 'wght'],
+  axes: ['opsz'],
   style: ['normal', 'italic'],
   variable: '--font-fraunces',
   display: 'swap',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: '%s | GTM India',
   },
   description:
-    'GTM India and Presales India - community events for sales engineering, presales, and go-to-market professionals across India.',
+    'GTM India and Presales India - community events for Sales, Solutions Engineering, and GTM professionals across India.',
   openGraph: {
     siteName: 'GTM India',
     locale: 'en_IN',
