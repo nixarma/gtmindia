@@ -12,7 +12,7 @@ export interface Event {
   city: string
   date: string
   time?: string
-  displayDate: string
+  displayDate?: string
   status: EventStatus
   lumaUrl: string
   series?: string
