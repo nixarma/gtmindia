@@ -2,79 +2,78 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 const links = [
-  { href: '/events',        label: 'Events' },
+  { href: '/events',         label: 'Events' },
   { href: '/presales-india', label: 'Presales India' },
-  { href: '/about',         label: 'About' },
+  { href: '/about',          label: 'About' },
 ]
 
 export function Nav() {
   const pathname = usePathname()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <header
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        background: 'var(--color-white)',
-        borderBottom: '1px solid var(--color-lightest)',
-      }}
-    >
-      <nav
-        className="container"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingBlock: '1rem',
-        }}
-      >
-        <Link
-          href="/"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '1.5rem',
-            fontWeight: 500,
-            color: 'var(--color-ink)',
-            textDecoration: 'none',
-            letterSpacing: '-0.01em',
-          }}
-        >
-          GTM India
+    <header className="nav">
+      <div className="container nav__inner">
+        <Link href="/" className="wm" aria-label="GTM India — Home">
+          GTM <em>India</em>
         </Link>
 
-        <ul
-          style={{
-            display: 'flex',
-            gap: '2rem',
-            listStyle: 'none',
-            alignItems: 'center',
-          }}
-        >
+        <nav className="nav__links" aria-label="Primary">
           {links.map(({ href, label }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.9rem',
-                  color: pathname === href
-                    ? 'var(--color-primary)'
-                    : 'var(--color-ink)',
-                  textDecoration: 'none',
-                  fontWeight: pathname === href ? 500 : 400,
-                  opacity: pathname === href ? 1 : 0.75,
-                  transition: 'opacity 0.2s, color 0.2s',
-                }}
-              >
-                {label}
-              </Link>
-            </li>
+            <Link
+              key={href}
+              href={href}
+              className="nav__link"
+              aria-current={pathname === href ? 'page' : undefined}
+            >
+              {label}
+            </Link>
           ))}
-        </ul>
-      </nav>
+          <Link href="/events" className="nav__cta">
+            See upcoming events
+          </Link>
+        </nav>
+
+        <button
+          className={`nav__burger${menuOpen ? ' is-open' : ''}`}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
+
+      <div
+        id="mobile-menu"
+        className={`nav__menu${menuOpen ? ' is-open' : ''}`}
+      >
+        {links.map(({ href, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className="nav__link"
+            aria-current={pathname === href ? 'page' : undefined}
+            onClick={() => setMenuOpen(false)}
+          >
+            {label}
+          </Link>
+        ))}
+        <Link
+          href="/events"
+          className="nav__cta"
+          style={{ alignSelf: 'flex-start' }}
+          onClick={() => setMenuOpen(false)}
+        >
+          See upcoming events
+        </Link>
+      </div>
     </header>
   )
 }

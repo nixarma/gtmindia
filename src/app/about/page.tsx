@@ -79,15 +79,15 @@ export default function AboutPage() {
             }}
           >
             <PersonCard
-              name="Nikhil (Nix) Sarma"
+              name="Nikhil Sarma"
               role="Founder, GTM Solutions Consulting"
-              bio="Nix is a B2B SaaS GTM coach focused on presales, discovery, and value engineering. He started Presales India in 2024 and continues to grow the community across India."
+              bio="Nikhil is a GTM coach and consultant focused on decision confidence, value discovery, storytelling, and negotiation. He started Presales India in 2024 and continues to grow the community across India."
               linkedIn="https://linkedin.com/in/nikhilsarma"
             />
             <PersonCard
-              name="Utkarsh"
+              name="Utkarsh Banwar"
               role="Co-organiser, GTM India"
-              bio="[Placeholder - add Utkarsh's bio here.]"
+              bio="[Placeholder - add Utkarsh Banwar's bio here.]"
               linkedIn="#"
               isPlaceholder
             />
