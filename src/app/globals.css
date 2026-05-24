@@ -267,11 +267,14 @@
      .nav__links { display: none; }
      .wm { font-size: 1.2rem; }
      .nav__burger {
+       position: relative;
+       z-index: 60;
        display: inline-flex;
        flex-direction: column;
        gap: 5px;
        padding: 0.5rem;
        flex-shrink: 0;
+       -webkit-tap-highlight-color: transparent;
      }
      .nav__burger span {
        display: block;
@@ -860,8 +863,9 @@
      padding-block: 1rem;
      margin-bottom: 0;
    }
-   .filters__inner { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: center; }
-   .filters__group { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+   .filters__inner { display: flex; flex-direction: column; gap: 1.25rem; }
+   .filters__group { display: flex; flex-direction: column; gap: 0.6rem; }
+   .filters__pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
    .filters__label {
      font-family: var(--font-body);
      font-size: var(--fs-eyebrow);
@@ -869,7 +873,7 @@
      letter-spacing: 0.12em;
      font-weight: 500;
      color: var(--fg-quiet);
-     margin-right: 0.25rem;
+
      white-space: nowrap;
    }
   .filters__group--disabled {
@@ -1211,5 +1215,4 @@
   display: flex;
   gap: 0.75rem;
   align-items: center;
-}  
-  
+}

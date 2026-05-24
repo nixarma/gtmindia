@@ -17,9 +17,9 @@ const formatLabels: Record<EventFormat | 'all', string> = {
 
 const CITIES = [
   { value: 'Bangalore', label: 'BLR' },
-  { value: 'Hyderabad', label: 'HYD' },
   { value: 'Mumbai',    label: 'BOM' },
   { value: 'Delhi',     label: 'DEL' },
+  { value: 'Hyderabad', label: 'HYD' },
 ] as const
 
 export function FilterBar({
@@ -38,48 +38,52 @@ export function FilterBar({
         {/* Format group */}
         <div className="filters__group">
           <span className="filters__label">Format</span>
-          {(['all', ...ALL_FORMATS] as (EventFormat | 'all')[]).map((f) => (
-            <button
-              key={f}
-              type="button"
-              className={`filter-pill${format === f ? ' filter-pill--active' : ''}`}
-              onClick={() => {
-                onFormatChange(f)
-                if (f === 'virtual') onCityChange('all')
-              }}
-              aria-pressed={format === f}
-            >
-              {formatLabels[f]}
-            </button>
-          ))}
+          <div className="filters__pills">
+            {(['all', ...ALL_FORMATS] as (EventFormat | 'all')[]).map((f) => (
+              <button
+                key={f}
+                type="button"
+                className={`filter-pill${format === f ? ' filter-pill--active' : ''}`}
+                onClick={() => {
+                  onFormatChange(f)
+                  if (f === 'virtual') onCityChange('all')
+                }}
+                aria-pressed={format === f}
+              >
+                {formatLabels[f]}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* City group */}
         <div className={`filters__group${cityDisabled ? ' filters__group--disabled' : ''}`}>
           <span className="filters__label">City</span>
-          <button
-            type="button"
-            className={`filter-pill${city === 'all' ? ' filter-pill--active' : ''}`}
-            onClick={() => onCityChange('all')}
-            aria-pressed={city === 'all'}
-            disabled={cityDisabled}
-            aria-disabled={cityDisabled}
-          >
-            All
-          </button>
-          {CITIES.map((c) => (
+          <div className="filters__pills">
             <button
-              key={c.value}
               type="button"
-              className={`filter-pill${city === c.value ? ' filter-pill--active' : ''}`}
-              onClick={() => onCityChange(c.value)}
-              aria-pressed={city === c.value}
+              className={`filter-pill${city === 'all' ? ' filter-pill--active' : ''}`}
+              onClick={() => onCityChange('all')}
+              aria-pressed={city === 'all'}
               disabled={cityDisabled}
               aria-disabled={cityDisabled}
             >
-              {c.label}
+              All
             </button>
-          ))}
+            {CITIES.map((c) => (
+              <button
+                key={c.value}
+                type="button"
+                className={`filter-pill${city === c.value ? ' filter-pill--active' : ''}`}
+                onClick={() => onCityChange(c.value)}
+                aria-pressed={city === c.value}
+                disabled={cityDisabled}
+                aria-disabled={cityDisabled}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
         </div>
 
       </div>
