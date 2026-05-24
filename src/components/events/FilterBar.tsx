@@ -1,5 +1,5 @@
 import type { EventFormat } from '@/types/event'
-import { ALL_CITIES, ALL_FORMATS } from '@/data/events'
+import { ALL_FORMATS } from '@/lib/eventConstants'
 
 interface FilterBarProps {
   format: EventFormat | 'all'
@@ -10,10 +10,17 @@ interface FilterBarProps {
 }
 
 const formatLabels: Record<EventFormat | 'all', string> = {
-  all:        'All formats',
-  virtual:    'Virtual',
+  all:         'All formats',
+  virtual:     'Virtual',
   'in-person': 'In-person',
 }
+
+const CITIES = [
+  { value: 'Bangalore', label: 'BLR' },
+  { value: 'Hyderabad', label: 'HYD' },
+  { value: 'Mumbai',    label: 'BOM' },
+  { value: 'Delhi',     label: 'DEL' },
+] as const
 
 export function FilterBar({
   format,
@@ -22,9 +29,13 @@ export function FilterBar({
   onCityChange,
   sticky = false,
 }: FilterBarProps) {
+  const cityDisabled = format === 'virtual'
+
   return (
     <div className={`filters${sticky ? ' filters--sticky' : ''}`}>
       <div className="filters__inner">
+
+        {/* Format group */}
         <div className="filters__group">
           <span className="filters__label">Format</span>
           {(['all', ...ALL_FORMATS] as (EventFormat | 'all')[]).map((f) => (
@@ -32,7 +43,10 @@ export function FilterBar({
               key={f}
               type="button"
               className={`filter-pill${format === f ? ' filter-pill--active' : ''}`}
-              onClick={() => onFormatChange(f)}
+              onClick={() => {
+                onFormatChange(f)
+                if (f === 'virtual') onCityChange('all')
+              }}
               aria-pressed={format === f}
             >
               {formatLabels[f]}
@@ -40,28 +54,34 @@ export function FilterBar({
           ))}
         </div>
 
-        <div className="filters__group">
+        {/* City group */}
+        <div className={`filters__group${cityDisabled ? ' filters__group--disabled' : ''}`}>
           <span className="filters__label">City</span>
           <button
             type="button"
             className={`filter-pill${city === 'all' ? ' filter-pill--active' : ''}`}
             onClick={() => onCityChange('all')}
             aria-pressed={city === 'all'}
+            disabled={cityDisabled}
+            aria-disabled={cityDisabled}
           >
-            All cities
+            All
           </button>
-          {ALL_CITIES.map((c) => (
+          {CITIES.map((c) => (
             <button
-              key={c}
+              key={c.value}
               type="button"
-              className={`filter-pill${city === c ? ' filter-pill--active' : ''}`}
-              onClick={() => onCityChange(c)}
-              aria-pressed={city === c}
+              className={`filter-pill${city === c.value ? ' filter-pill--active' : ''}`}
+              onClick={() => onCityChange(c.value)}
+              aria-pressed={city === c.value}
+              disabled={cityDisabled}
+              aria-disabled={cityDisabled}
             >
-              {c}
+              {c.label}
             </button>
           ))}
         </div>
+
       </div>
     </div>
   )

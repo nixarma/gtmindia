@@ -2,6 +2,13 @@ export type EventFormat = 'virtual' | 'in-person'
 export type EventCommunity = 'presales-india' | 'gtm-india' | 'self'
 export type EventStatus = 'upcoming' | 'past'
 
+export interface Speaker {
+  name: string
+  role?: string
+  company?: string
+  linkedin?: string
+}
+
 export interface Event {
   id?: string
   slug?: string
@@ -10,10 +17,14 @@ export interface Event {
   community: EventCommunity
   format: EventFormat
   city: string
-  date: string
+  date: string           // DD.MM.YYYY
   time?: string
-  displayDate?: string
   status: EventStatus
-  lumaUrl: string
+  lumaUrl?: string
   series?: string
+  photos?: string[]      // first image used as cover
+  speakers?: Speaker[]
+  venue?: string
+  capacity?: number
+  tags?: string[]
 }

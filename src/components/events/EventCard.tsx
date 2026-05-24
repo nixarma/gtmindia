@@ -1,17 +1,11 @@
+import Link from 'next/link'
 import type { Event } from '@/types/event'
+import { formatEventDate } from '@/lib/dateUtils'
 
 const communityLabel: Record<Event['community'], string> = {
   'presales-india': 'Presales India',
   'gtm-india':      'GTM India',
   'self':           'SELF',
-}
-
-const cityLabel: Record<string, string> = {
-  Virtual:   'Virtual',
-  Bangalore: 'Bangalore',
-  Hyderabad: 'Hyderabad',
-  Mumbai:    'Mumbai',
-  Delhi:     'Delhi',
 }
 
 interface EventCardProps {
@@ -20,6 +14,10 @@ interface EventCardProps {
 }
 
 export function EventCard({ event, isPast = false }: EventCardProps) {
+  const slug = event.slug ?? event.id
+  const eventUrl = slug ? `/events/${slug}` : null
+  const isVirtual = event.format === 'virtual'
+
   return (
     <article className={`event-card${isPast ? ' event-card--past' : ''}`}>
       <div className="event-card__meta">
@@ -27,11 +25,14 @@ export function EventCard({ event, isPast = false }: EventCardProps) {
           {communityLabel[event.community]}
         </span>
         <span className="event-meta__chip">
-          {event.format === 'virtual' ? 'Virtual' : 'In-person'}
+          {isVirtual ? 'Virtual' : 'In-person'}
         </span>
-        <span className="event-meta__chip">
-          {cityLabel[event.city] ?? event.city}
-        </span>
+        {/* Suppress city chip for virtual events — it's redundant */}
+        {!isVirtual && (
+          <span className="event-meta__chip">
+            {event.city}
+          </span>
+        )}
         {isPast && (
           <span className="event-meta__chip event-meta__chip--past">
             Past
@@ -40,22 +41,39 @@ export function EventCard({ event, isPast = false }: EventCardProps) {
       </div>
 
       <div className="event-card__body">
-        <p className="event-card__date">{event.displayDate}</p>
-        <h3 className="event-card__title">{event.title}</h3>
+        <p className="event-card__date">{formatEventDate(event.date)}</p>
+        {eventUrl ? (
+          <Link href={eventUrl}>
+            <h3 className="event-card__title">{event.title}</h3>
+          </Link>
+        ) : (
+          <h3 className="event-card__title">{event.title}</h3>
+        )}
         <p className="event-card__desc">{event.description}</p>
       </div>
 
       <div className="event-card__footer">
-        <a
-          href={event.lumaUrl}
-          target="_blank"
-          rel="noopener"
-          className={`btn ${isPast ? 'btn--ghost' : 'btn--primary'} btn--sm`}
-          aria-label={`${isPast ? 'View recap for' : 'Register for'} ${event.title}`}
-        >
-          {isPast ? 'View recap' : 'Register on Luma'}
-          <span className="arrow">&rarr;</span>
-        </a>
+        {!isPast && event.lumaUrl && (
+          <a
+            href={event.lumaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--primary btn--sm"
+            aria-label={`Register for ${event.title}`}
+          >
+            Register on Luma <span className="arrow">&rarr;</span>
+          </a>
+        )}
+        {eventUrl && (
+          <Link
+            href={eventUrl}
+            className="btn btn--ghost btn--sm"
+            aria-label={`${isPast ? 'View recap for' : 'More details on'} ${event.title}`}
+          >
+            {isPast ? 'View recap' : 'Details'}
+            <span className="arrow">&rarr;</span>
+          </Link>
+        )}
       </div>
     </article>
   )

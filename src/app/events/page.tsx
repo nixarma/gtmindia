@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getAllEvents } from '@/data/events'
 import { EventsFilter } from '@/components/events/EventsFilter'
 
 export const metadata: Metadata = {
@@ -7,6 +8,12 @@ export const metadata: Metadata = {
 }
 
 export default function EventsPage() {
+  const all = getAllEvents()
+  const events = all.map((event) => ({
+    event,
+    isPast: event.status === 'past',
+  }))
+
   return (
     <section style={{ paddingBlock: 'var(--section-pad-y)' }}>
       <div className="container">
@@ -16,7 +23,7 @@ export default function EventsPage() {
             Virtual and in-person, across India. Free to attend — RSVP on Luma.
           </p>
         </div>
-        <EventsFilter limit={100} stickyFilters={true} />
+        <EventsFilter events={events} stickyFilters={true} showArchiveLink={false} />
       </div>
     </section>
   )

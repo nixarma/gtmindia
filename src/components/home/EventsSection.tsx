@@ -1,8 +1,11 @@
+import { getHomeEvents } from '@/data/events'
 import { EventsFilter } from '@/components/events/EventsFilter'
 
 export function EventsSection() {
+  const events = getHomeEvents({ limit: 5 })
+
   return (
-    <section className="events-section" id="events">
+    <section className="events-section">
       <div className="container">
         <div className="section-head">
           <h2>Upcoming <em>events.</em></h2>
@@ -10,7 +13,7 @@ export function EventsSection() {
             Virtual and in-person, across India. Free to attend — RSVP on Luma.
           </p>
         </div>
-        <EventsFilter limit={5} stickyFilters={false} />
+        <EventsFilter events={events} stickyFilters={false} showArchiveLink={true} />
       </div>
     </section>
   )

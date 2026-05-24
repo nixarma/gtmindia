@@ -1,27 +1,35 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import type { EventFormat } from '@/types/event'
-import { getHomeEvents } from '@/data/events'
+import type { Event, EventFormat } from '@/types/event'
 import { FilterBar } from './FilterBar'
 import { EventCard } from './EventCard'
 
 interface EventsFilterProps {
-  /** Cap for total events shown (upcoming + backfill past). Default: 5 */
-  limit?: number
+  /** All events passed from a server component — no data fetching here */
+  events: { event: Event; isPast: boolean }[]
   /** Whether the filter bar sticks to the viewport on scroll */
   stickyFilters?: boolean
+  /** Show the "See all events" footer link — disable on the /events page itself */
+  showArchiveLink?: boolean
 }
 
 export function EventsFilter({
-  limit = 5,
+  events,
   stickyFilters = false,
+  showArchiveLink = true,
 }: EventsFilterProps) {
   const [format, setFormat] = useState<EventFormat | 'all'>('all')
   const [city, setCity] = useState<string>('all')
 
-  const items = getHomeEvents({ format, city, limit })
+  const items = useMemo(() => {
+    return events.filter(({ event }) => {
+      if (format !== 'all' && event.format !== format) return false
+      if (city !== 'all' && event.city !== city) return false
+      return true
+    })
+  }, [events, format, city])
 
   const upcomingCount = items.filter((i) => !i.isPast).length
   const pastCount     = items.filter((i) => i.isPast).length
@@ -51,21 +59,23 @@ export function EventsFilter({
         <>
           <div className="events-grid">
             {items.map(({ event, isPast }) => (
-              <EventCard key={event.id} event={event} isPast={isPast} />
+              <EventCard key={event.id ?? event.slug} event={event} isPast={isPast} />
             ))}
           </div>
 
           <div className="events-filter__footer">
-            {pastCount > 0 && upcomingCount < limit && (
+            {pastCount > 0 && upcomingCount < events.filter(i => !i.isPast).length && (
               <p className="events-filter__backfill-note">
                 Showing {upcomingCount} upcoming
-                {upcomingCount > 0 ? ` and ${pastCount} past` : ` past`}{' '}
+                {upcomingCount > 0 ? ` and ${pastCount} past` : ' past'}{' '}
                 event{items.length !== 1 ? 's' : ''}.
               </p>
             )}
-            <Link href="/events" className="btn btn--ghost">
-              See all events <span className="arrow">&rarr;</span>
-            </Link>
+            {showArchiveLink && (
+              <Link href="/events" className="btn btn--ghost">
+                See all events <span className="arrow">&rarr;</span>
+              </Link>
+            )}
           </div>
         </>
       )}
