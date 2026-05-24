@@ -4,6 +4,8 @@ import './globals.css'
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
 import { SmoothScrollProvider } from '@/components/ui/SmoothScrollProvider'
+import { defaultMetadata } from '@/lib/metadata'
+import { StructuredData } from '@/components/ui/StructuredData'
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -20,18 +22,7 @@ const dmSans = DM_Sans({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  title: {
-    default: 'GTM India',
-    template: '%s | GTM India',
-  },
-  description:
-    'GTM India and Presales India - community events for Sales, Solutions Engineering, and GTM professionals across India.',
-  openGraph: {
-    siteName: 'GTM India',
-    locale: 'en_IN',
-  },
-}
+export const metadata = defaultMetadata
 
 export default function RootLayout({
   children,
@@ -41,7 +32,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fraunces.variable} ${dmSans.variable}`}>
       <body>
-        <SmoothScrollProvider />
+      <StructuredData />
+      <SmoothScrollProvider />
         <Nav />
         <main>{children}</main>
         <Footer />
