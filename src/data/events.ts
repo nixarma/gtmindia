@@ -1,4 +1,4 @@
-import type { Event } from '@/types/event'
+import type { Event, EventFormat } from "@/types/event"
 
 export const events: Event[] = [
   // ── Upcoming ──────────────────────────────────────────────────────────────
