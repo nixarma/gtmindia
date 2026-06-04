@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import PhotoCarousel from '@/components/ui/PhotoCarousel'
 import { formatEventDate } from '@/lib/dateUtils'
-import type { Event } from '@/lib/events'
+import type { Event } from '@/types/event'
 import { CldImage } from 'next-cloudinary'
 
 const communityLabel: Record<string, string> = {
