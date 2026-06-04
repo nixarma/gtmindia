@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react'
 import Image from 'next/image'
 
 interface PhotoCarouselProps {
-  images: string[]         // array of paths e.g. ['/images/bangalore-may-2025/01.jpg']
+  images: string[]         // array of paths e.g. ['/images/Bengaluru-may-2025/01.jpg']
   alt?: string             // base alt text — index is appended automatically
   aspectRatio?: string     // tailwind aspect class, defaults to 'aspect-[16/10]'
   className?: string
@@ -92,18 +92,19 @@ export default function PhotoCarousel({
           </button>
 
           {/* Dot indicators */}
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex">
             {images.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrent(index)}
                 aria-label={`Go to photo ${index + 1}`}
-                className="
-                  h-1.5 rounded-full bg-white transition-all duration-300
-                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60
-                "
-                style={{ width: index === current ? '20px' : '6px', opacity: index === current ? 1 : 0.5 }}
-              />
+                className="flex items-center justify-center w-6 h-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              >
+                <span
+                  className="block h-1.5 rounded-full bg-white transition-all duration-300"
+                  style={{ width: index === current ? '20px' : '6px', opacity: index === current ? 1 : 0.5 }}
+                />
+              </button>
             ))}
           </div>
         </>

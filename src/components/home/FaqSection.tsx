@@ -23,11 +23,10 @@ const faqItems = [
     ),
   },
   {
-    question: 'Is there a cost?',
+    question: 'How much do I need to pay to attend?',
     answer: (
       <p>
-        No. The community is non-commercial — an initiative by GTM Solutions
-        Consulting. No sponsor pitches, no badge scanning, no upsell.
+       Nothing. Attendance is free.
       </p>
     ),
   },
@@ -37,8 +36,7 @@ const faqItems = [
       <p>
         Pick an event from the{' '}
         <Link href="/events">events page</Link> and RSVP on Luma. In-person
-        events fill quickly — RSVP early. For SELF (leadership track), reach
-        out directly.
+        events fill quickly - RSVP early.
       </p>
     ),
   },
@@ -46,12 +44,8 @@ const faqItems = [
     question: 'Can I speak or host in my city?',
     answer: (
       <p>
-        Yes — we&apos;re always looking for practitioners with a story to tell,
-        and for hosts in new cities. Drop us a note on LinkedIn or via{' '}
-        <a href="https://gtmsolutions.co" target="_blank" rel="noopener">
-          gtmsolutions.co
-        </a>
-        .
+        Yes! We&apos;re always looking for practitioners with a story to tell,
+        and for hosts in new cities. Drop us a note on LinkedIn.
       </p>
     ),
   },

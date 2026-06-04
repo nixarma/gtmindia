@@ -38,7 +38,7 @@ Create a .mdx file in src/content/events/:
   community: "presales-india"   # or "gtm-india"
   format: "in-person"           # or "virtual"
   series: "regular"             # or "self"
-  city: "Bangalore"             # omit for virtual
+  city: "Bengaluru"             # omit for virtual
   description: "One-paragraph description."
   lumaUrl: "https://lu.ma/your-event-slug"
   status: "upcoming"            # or "past"

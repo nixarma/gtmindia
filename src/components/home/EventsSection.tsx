@@ -1,8 +1,12 @@
-import { getHomeEvents } from '@/data/events'
+import { getAllEvents } from '@/lib/events'
 import { EventsFilter } from '@/components/events/EventsFilter'
 
 export function EventsSection() {
-  const events = getHomeEvents({ limit: 5 })
+  const all = getAllEvents()
+  const events = all.map((event) => ({
+    event,
+    isPast: event.status === 'past',
+  }))
 
   return (
     <section className="events-section">
@@ -13,7 +17,7 @@ export function EventsSection() {
             Virtual and in-person, across India. Free to attend — RSVP on Luma.
           </p>
         </div>
-        <EventsFilter events={events} stickyFilters={false} showArchiveLink={true} />
+        <EventsFilter events={events} stickyFilters={false} showArchiveLink={true} defaultVisible={6} />
       </div>
     </section>
   )

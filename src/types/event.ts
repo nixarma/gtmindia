@@ -21,6 +21,7 @@ export interface Event {
   time?: string
   status: EventStatus
   lumaUrl?: string
+  lumaEmbedUrl?: string
   series?: string
   photos?: string[]      // first image used as cover
   speakers?: Speaker[]

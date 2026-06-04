@@ -48,7 +48,7 @@ export default function AboutPage() {
               maxWidth: '60ch',
             }}
           >
-            This is a non-commercial initiative, run by practitioners for practitioners.
+            Run by practitioners for practitioners.
             It is an initiative of{' '}
             <a
               href="https://gtmsolutions.co"

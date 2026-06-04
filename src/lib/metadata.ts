@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 const BASE_URL = 'https://gtmindia.co'
 
 export const viewport: Viewport = {
-  themeColor: '#E35336',
+  themeColor: '#9E3A26',
   width: 'device-width',
   initialScale: 1,
 }
@@ -17,7 +17,7 @@ export const defaultMetadata: Metadata = {
   },
 
   description:
-    'GTM India is a practitioner-led sales and go-to-market community for B2B professionals across Bangalore, Mumbai, Hyderabad and Delhi. Events, programmes, and peer learning — no theory, no fluff.',
+    'GTM India is a practitioner-led sales and go-to-market community for B2B professionals across Bengaluru, Mumbai, Hyderabad and Delhi NCR. Events, programmes, and peer learning — no theory, no fluff.',
 
   keywords: [
     'GTM India',
@@ -25,7 +25,7 @@ export const defaultMetadata: Metadata = {
     'go-to-market India',
     'B2B sales India',
     'presales India',
-    'GTM community Bangalore',
+    'GTM community Bengaluru',
     'GTM community Mumbai',
     'sales enablement India',
   ],

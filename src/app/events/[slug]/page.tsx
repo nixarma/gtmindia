@@ -85,14 +85,17 @@ export default async function EventPage({ params }: Props) {
               />
             )}
 
-            {!isPast && event.lumaUrl && (
+            {!isPast && event.lumaEmbedUrl && (
               <div className="event-page__luma">
                 <iframe
-                  src={`${event.lumaUrl}/embed`}
-                  style={{ width: '100%', border: 'none', borderRadius: 'var(--radius-lg)' }}
-                  height="600"
-                  allowFullScreen
+                  src={event.lumaEmbedUrl}
+                  width="100%"
+                  height="450"
+                  frameBorder={0}
+                  style={{ border: 'none', borderRadius: 'var(--radius-lg)' }}
+                  allow="fullscreen; payment"
                   aria-label={`Register for ${event.title} on Luma`}
+                  tabIndex={0}
                 />
               </div>
             )}
@@ -105,15 +108,13 @@ export default async function EventPage({ params }: Props) {
 
             {!isPast && event.lumaUrl && (
               <div className="event-page__cta-card">
-                <p className="event-page__cta-label">Free to attend</p>
                 <a
                   href={event.lumaUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn--primary btn--lg"
-                  style={{ width: '100%', justifyContent: 'center' }}
+                  className="event-page__luma-fallback"
                 >
-                  Register on Luma <span className="arrow">&rarr;</span>
+                  Open on Luma &rarr;
                 </a>
               </div>
             )}

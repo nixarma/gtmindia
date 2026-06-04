@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     'Presales India is a community for sales engineers and presales professionals across India, founded in 2024.',
 }
 
-const cities = ['Bangalore', 'Hyderabad', 'Mumbai', 'Delhi']
+const cities = ['Bengaluru', 'Hyderabad', 'Mumbai', 'Delhi NCR']
 
 export default function PresalesIndiaPage() {
   return (
@@ -75,7 +75,7 @@ export default function PresalesIndiaPage() {
             />
             <ProgrammeCard
               title="SELF - Quarterly In-Person"
-              description="In-person SELF sessions in Bangalore for SE leaders who want deeper, off-the-record conversation."
+              description="In-person SELF sessions in Bengaluru for SE leaders who want deeper, off-the-record conversation."
               isSelf
             />
           </div>

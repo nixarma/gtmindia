@@ -19,7 +19,6 @@ export default function HomePage() {
     <>
       <HeroSection />
       <BlurbSection />
-      <EventsSection />
       <NextEventSection />
       <ProgrammesSection />
       <PastEventsSection />

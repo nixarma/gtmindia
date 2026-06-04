@@ -7,7 +7,7 @@ const programmes = [
   },
   {
     index: '02 / In-person',
-    desc: 'Small evening meetups for SE / presales folks. Bangalore, Hyderabad, Mumbai, Delhi. Different topic every city, every month.',
+    desc: 'Small evening meetups for SE / presales folks. Bengaluru, Hyderabad, Mumbai, Delhi NCR. Different topic every city, every month.',
     title: <><span>Presales India </span><em>Meetups</em></>,
     meta: ['Monthly', '4 cities'],
   },

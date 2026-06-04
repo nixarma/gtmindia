@@ -16,10 +16,10 @@ const formatLabels: Record<EventFormat | 'all', string> = {
 }
 
 const CITIES = [
-  { value: 'Bangalore', label: 'BLR' },
-  { value: 'Mumbai',    label: 'BOM' },
-  { value: 'Delhi',     label: 'DEL' },
-  { value: 'Hyderabad', label: 'HYD' },
+  { value: 'Bengaluru',     label: 'BLR' },
+  { value: 'Mumbai',        label: 'BOM' },
+  { value: 'Delhi NCR', label: 'DEL' },
+  { value: 'Hyderabad',     label: 'HYD' },
 ] as const
 
 export function FilterBar({

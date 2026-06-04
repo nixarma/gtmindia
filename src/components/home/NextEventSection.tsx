@@ -1,78 +1,140 @@
 import Link from 'next/link'
+import PhotoCarousel from '@/components/ui/PhotoCarousel'
+import { getUpcomingEvents } from '@/lib/events'
+import { formatEventDate } from '@/lib/dateUtils'
+
+const communityLabel: Record<string, string> = {
+  'presales-india': 'Presales India',
+  'gtm-india':      'GTM India',
+  'self':           'SELF',
+}
 
 export function NextEventSection() {
+  const upcoming = getUpcomingEvents()
+  const event = upcoming[0]
+
+  if (!event) return null
+
+  const also = upcoming.slice(1, 4)
+  const isVirtual = event.format === 'virtual'
+  const photos = event.photos ?? []
   return (
     <section className="next-event">
       <div className="container">
+
         <div className="next-event__head">
           <h2 className="next-event__title">
-            Next <em>event</em>
+            Next <em>events</em>
           </h2>
-          <span className="next-event__count">01 / 04 upcoming</span>
         </div>
 
-        <div className="next-event__grid">
+        {/* ── Featured event ── */}
+        <div className="next-event__featured">
+
+          {/* Left — poster */}
+          <div className="next-event__photo">
+            <PhotoCarousel
+              images={photos}
+              alt={event.title}
+              aspectRatio="aspect-[4/5]"
+            />
+          </div>
+
+          {/* Right — details */}
           <div className="next-event__panel">
             <div className="event-meta">
               <span className="event-meta__chip event-meta__chip--accent">
-                Presales India
+                {communityLabel[event.community] ?? event.community}
               </span>
-              <span className="event-meta__chip">In-person</span>
-              <span className="event-meta__chip">Bangalore</span>
+              <span className="event-meta__chip">
+                {isVirtual ? 'Virtual' : 'In-person'}
+              </span>
+              {!isVirtual && event.city && (
+                <span className="event-meta__chip">{event.city}</span>
+              )}
             </div>
 
-            <h3 className="next-event__name">
-              Multi-stakeholder<br />
-              <em>demos</em>, without losing<br />
-              the thread.
-            </h3>
+            <h3 className="next-event__name">{event.title}</h3>
 
-            <p className="next-event__desc">
-              Monthly in-person meetup for presales practitioners in Bangalore.
-              This month: how to run a demo when there are five people in the
-              room, three personas, and one technical buyer who hates demos.
-            </p>
+            {event.description && (
+              <p className="next-event__desc">{event.description}</p>
+            )}
 
             <dl className="next-event__dl">
               <dt>Date</dt>
-              <dd>Sat, 19 July 2025 · 6:30 PM IST</dd>
-              <dt>Where</dt>
-              <dd>Indiranagar, Bangalore (venue shared on RSVP)</dd>
-              <dt>RSVP</dt>
-              <dd>
-                <a
-                  href="https://lu.ma/presales-india-blr-july"
-                  target="_blank"
-                  rel="noopener"
-                  className="next-event__luma-link"
-                >
-                  lu.ma/presales-india-blr-july &rarr;
-                </a>
-              </dd>
+              <dd>{formatEventDate(event.date)}</dd>
+              {!isVirtual && event.venue && (
+                <>
+                  <dt>Where</dt>
+                  <dd>{event.venue}</dd>
+                </>
+              )}
             </dl>
 
-            <div className="next-event__actions">
-              <a
-                href="https://lu.ma/presales-india-blr-july"
-                className="btn btn--primary btn--lg"
-                target="_blank"
-                rel="noopener"
-              >
-                Register on Luma <span className="arrow">&rarr;</span>
-              </a>
-              <Link href="/events" className="btn btn--ghost-dark btn--lg">
-                See all events
-              </Link>
-            </div>
-          </div>
-
-          <div className="next-event__photo">
-            <div className="next-event__photo-cap">
-              <b>Last month, Bangalore</b>
-              <span>32 in the room</span>
-            </div>
+            {event.lumaUrl && (
+              <div className="next-event__actions">
+                <a
+                  href={event.lumaUrl}
+                  className="btn btn--primary btn--lg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Register on Luma <span className="arrow">&rarr;</span>
+                </a>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* ── Also upcoming ── */}
+        {also.length > 0 && (
+          <div className="next-event__also">
+            <span className="next-event__also-label">Also coming up</span>
+            <ul className="next-event__also-list">
+              {also.map((e) => {
+                const eVirtual = e.format === 'virtual'
+                const ePhotos = e.photos ?? []
+                const eLocation = eVirtual ? 'Virtual' : (e.city || 'India')
+
+                return (
+                  <li key={e.slug} className="next-event__also-item">
+                    <Link href={`/events/${e.slug}`} className="next-event__also-link">
+
+                      {/* Poster thumbnail */}
+                      <div className="next-event__also-poster">
+                        {ePhotos.length > 0 ? (
+                          <img
+                            src={ePhotos[0]}
+                            alt={e.title}
+                            className="next-event__also-img"
+                          />
+                        ) : (
+                          <div className="next-event__also-placeholder" />
+                        )}
+                      </div>
+
+                      {/* Details */}
+                      <div className="next-event__also-details">
+                        <span className="next-event__also-title">{e.title}</span>
+                        <span className="next-event__also-meta">
+                          {formatEventDate(e.date)} · {eLocation}
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
+
+        {/* ── Footer ── */}
+        <div className="next-event__footer">
+          <Link href="/events" className="btn btn--ghost-dark btn--lg">
+            See all events
+          </Link>
+        </div>
+
       </div>
     </section>
   )

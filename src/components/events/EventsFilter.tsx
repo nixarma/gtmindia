@@ -13,23 +13,30 @@ interface EventsFilterProps {
   stickyFilters?: boolean
   /** Show the "See all events" footer link — disable on the /events page itself */
   showArchiveLink?: boolean
+  /** Max events shown when no filters are active. Lifted when filters are applied. */
+  defaultVisible?: number
 }
 
 export function EventsFilter({
   events,
   stickyFilters = false,
   showArchiveLink = true,
+  defaultVisible,
 }: EventsFilterProps) {
   const [format, setFormat] = useState<EventFormat | 'all'>('all')
   const [city, setCity] = useState<string>('all')
 
+  const filtersActive = format !== 'all' || city !== 'all'
+
   const items = useMemo(() => {
-    return events.filter(({ event }) => {
+    const filtered = events.filter(({ event }) => {
       if (format !== 'all' && event.format !== format) return false
       if (city !== 'all' && event.city !== city) return false
       return true
     })
-  }, [events, format, city])
+    if (!filtersActive && defaultVisible) return filtered.slice(0, defaultVisible)
+    return filtered
+  }, [events, format, city, filtersActive, defaultVisible])
 
   const upcomingCount = items.filter((i) => !i.isPast).length
   const pastCount     = items.filter((i) => i.isPast).length
