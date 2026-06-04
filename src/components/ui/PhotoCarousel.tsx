@@ -1,12 +1,12 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import Image from 'next/image'
+import { CldImage } from 'next-cloudinary'
 
 interface PhotoCarouselProps {
-  images: string[]         // array of paths e.g. ['/images/Bengaluru-may-2025/01.jpg']
-  alt?: string             // base alt text — index is appended automatically
-  aspectRatio?: string     // tailwind aspect class, defaults to 'aspect-[16/10]'
+  images: string[]         // Cloudinary public IDs e.g. ['events/20260606/01']
+  alt?: string
+  aspectRatio?: string
   className?: string
 }
 
@@ -35,18 +35,18 @@ export default function PhotoCarousel({
   return (
     <div className={`relative w-full overflow-hidden rounded-2xl bg-[#DDDCDB] ${aspectRatio} ${className}`}>
 
-      {/* Photos */}
-      {images.map((src, index) => (
+      {images.map((publicId, index) => (
         <div
-          key={src}
+          key={publicId}
           className="absolute inset-0 transition-opacity duration-500"
           style={{ opacity: index === current ? 1 : 0 }}
           aria-hidden={index !== current}
         >
-          <Image
-            src={src}
+          <CldImage
+            src={publicId}
             alt={`${alt} ${index + 1}`}
             fill
+            crop={{ type: 'auto', source: true }}
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 90vw"
             priority={index === 0}

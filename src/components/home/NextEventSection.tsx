@@ -1,7 +1,10 @@
+'use client'
+
 import Link from 'next/link'
 import PhotoCarousel from '@/components/ui/PhotoCarousel'
-import { getUpcomingEvents } from '@/lib/events'
 import { formatEventDate } from '@/lib/dateUtils'
+import type { Event } from '@/lib/events'
+import { CldImage } from 'next-cloudinary'
 
 const communityLabel: Record<string, string> = {
   'presales-india': 'Presales India',
@@ -9,10 +12,12 @@ const communityLabel: Record<string, string> = {
   'self':           'SELF',
 }
 
-export function NextEventSection() {
-  const upcoming = getUpcomingEvents()
-  const event = upcoming[0]
+interface NextEventSectionProps {
+  upcoming: Event[]
+}
 
+export function NextEventSection({ upcoming }: NextEventSectionProps) {
+  const event = upcoming[0]
   if (!event) return null
 
   const also = upcoming.slice(1, 4)
@@ -102,15 +107,18 @@ export function NextEventSection() {
 
                       {/* Poster thumbnail */}
                       <div className="next-event__also-poster">
-                        {ePhotos.length > 0 ? (
-                          <img
-                            src={ePhotos[0]}
-                            alt={e.title}
-                            className="next-event__also-img"
-                          />
-                        ) : (
-                          <div className="next-event__also-placeholder" />
-                        )}
+                      {ePhotos.length > 0 ? (
+  <CldImage
+    src={ePhotos[0]}
+    alt={e.title}
+    width={220}
+    height={220}
+    crop={{ type: "pad", source: true }}
+    className="next-event__also-img"
+  />
+) : (
+  <div className="next-event__also-placeholder" />
+)}
                       </div>
 
                       {/* Details */}
