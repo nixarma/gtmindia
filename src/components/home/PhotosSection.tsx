@@ -6,8 +6,8 @@ export default async function PhotosSection() {
   const now = new Date();
 
   const eventWithPhotos = allEvents
-    .filter((e) => e.date < now && e.photos && e.photos.length > 0)
-    .sort((a, b) => b.date.getTime() - a.date.getTime())[0];
+  .filter((e) => new Date(e.date) < now && e.photos && e.photos.length > 0)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0]
 
   if (!eventWithPhotos) return null;
 
