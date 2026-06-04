@@ -28,4 +28,5 @@ export interface Event {
   venue?: string
   capacity?: number
   tags?: string[]
+  content?: string       // raw MDX body
 }

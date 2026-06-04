@@ -14,7 +14,7 @@ export function getAllEvents(): Event[] {
   const events: Event[] = files.map((filename) => {
     const slug = filename.replace(/\.mdx$/, '')
     const raw = fs.readFileSync(path.join(EVENTS_DIR, filename), 'utf8')
-    const { data } = matter(raw)
+    const { data, content } = matter(raw)
 
     return {
       slug,
@@ -34,6 +34,7 @@ export function getAllEvents(): Event[] {
       venue:        data.venue,
       capacity:     data.capacity,
       tags:         data.tags         ?? [],
+      content:      content.trim()    || undefined,
     } satisfies Event
   })
 
