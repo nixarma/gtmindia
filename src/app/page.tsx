@@ -9,7 +9,6 @@ import { FaqSection }        from '@/components/home/FaqSection'
 import { CtaBannerSection }  from '@/components/home/CtaBannerSection'
 import PhotosSection from "@/components/home/PhotosSection";
 import ImpressionsSection from "@/components/home/ImpressionsSection"
-import { getUpcomingEvents, getPastEvents } from '@/lib/events'
 
 export const metadata: Metadata = {
   title: 'GTM India — Building India\'s GTM community',
@@ -27,7 +26,7 @@ export default function HomePage() {
       <ImpressionsSection />
       <BlurbSection />
       <NextEventSection upcoming={upcoming} />
-      <PastEventsSection events={past} />
+      <PastEventsSection />
       <ProgrammesSection />
       <FaqSection />
       <CtaBannerSection />
