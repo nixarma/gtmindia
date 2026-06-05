@@ -610,6 +610,21 @@
 .about__card:nth-child(2) { border-radius: 0 var(--radius-lg) 0 0; }
 .about__card:nth-child(3) { border-radius: 0 0 0 var(--radius-lg); }
 .about__card:last-child { border-radius: 0 0 var(--radius-lg) 0; }
+
+/* About page — person card mobile */
+@media (max-width: 640px) {
+  .person-card {
+    grid-template-columns: 1fr !important;
+  }
+  .person-card > div:first-child {
+    min-height: 280px;
+  }
+}
+
+/* Bio paragraph spacing */
+.person-card__bio p + p {
+  margin-top: 0.85rem;
+}
    /* ═══════════════════════════════════════════════════════════════════════════
       NEXT EVENT
       ═══════════════════════════════════════════════════════════════════════════ */
@@ -1022,6 +1037,22 @@
    }
    .cta-banner__actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
    
+   .cta-banner__btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  
+  .cta-banner__btn:hover {
+    opacity: 0.85;
+  }
    /* ═══════════════════════════════════════════════════════════════════════════
       EVENTS FILTER + CARDS
       ═══════════════════════════════════════════════════════════════════════════ */
@@ -2025,10 +2056,42 @@
   display: none;
 }
 
-/* ─── Beehiiv embed ───────────────────────────────────── */
+/* ─── Beehiiv embed ────────────────────────────────────────── */
+
+/* ─── Beehiiv embed ────────────────────────────────────────── */
 
 .beehiiv-embed {
-  max-width: 540px;
-  margin-inline: auto;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
+  width: 100%;
+}
+
+.beehiiv-embed > div {
+  width: 100% !important;
+  max-width: 640px !important;
+  margin-inline: auto !important;
+  overflow: hidden !important;
+}
+
+.beehiiv-embed iframe {
+  width: 100% !important;
+  max-width: 640px !important;
+  border: none !important;
+  min-height: 260px;
+  display: block !important;
+  margin-inline: auto !important;
+}
+
+/* About page — bio paragraph spacing */
+.person-card__bio p + p {
+  margin-top: 0.85rem;
+}
+
+/* About page — person card mobile */
+@media (max-width: 640px) {
+  .person-card {
+    grid-template-columns: 1fr !important;
+  }
+  .person-card > div:first-child {
+    min-height: 280px;
+  }
 }
