@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getPastEvents } from '@/lib/events'
 import { formatEventDate } from '@/lib/dateUtils'
+import type { Event } from '@/types/event'
 
 const communityLabel: Record<string, string> = {
   'presales-india': 'Presales India',
@@ -8,8 +9,12 @@ const communityLabel: Record<string, string> = {
   'self':           'SELF',
 }
 
-export function PastEventsSection() {
-  const past = getPastEvents().slice(0, 3)
+interface PastEventsSectionProps {
+  events?: Event[]
+}
+
+export function PastEventsSection({ events }: PastEventsSectionProps = {}) {
+  const past = events ?? getPastEvents().slice(0, 3)
   if (past.length === 0) return null
 
   return (

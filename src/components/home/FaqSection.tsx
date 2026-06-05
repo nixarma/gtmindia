@@ -36,7 +36,7 @@ const faqItems = [
     ),
   },
   {
-    question: 'Am I going to go hungry at in-person events',
+    question: 'Am I going to go hungry at in-person events?',
     answer: (
       <p>
        Not on our watch! You'll have snacks, water, coffee and tea!
