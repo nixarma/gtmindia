@@ -17,7 +17,7 @@ export const defaultMetadata: Metadata = {
   },
 
   description:
-    'GTM India is a practitioner-led sales and go-to-market community for B2B professionals across Bengaluru, Mumbai, Hyderabad and Delhi NCR. Events, programmes, and peer learning — no theory, no fluff.',
+    'GTM India is a practitioner-led sales and go-to-market community for B2B professionals across Bengaluru, Mumbai, Hyderabad and Delhi NCR. Events, programs, and peer learning — no theory, no fluff.',
 
   keywords: [
     'GTM India',
@@ -41,7 +41,7 @@ export const defaultMetadata: Metadata = {
     siteName: 'GTM India',
     title: 'GTM India — Sales & GTM community for India',
     description:
-      'Practitioner-led events and programmes for B2B sales and GTM professionals across India.',
+      'Practitioner-led events and programs for B2B sales and GTM professionals across India.',
     images: [
       {
         url: '/og-image.png',   // add a 1200×630 image to /public/
@@ -56,7 +56,7 @@ export const defaultMetadata: Metadata = {
     card: 'summary_large_image',
     title: 'GTM India — Sales & GTM community for India',
     description:
-      'Practitioner-led events and programmes for B2B sales and GTM professionals across India.',
+      'Practitioner-led events and programs for B2B sales and GTM professionals across India.',
     images: ['/og-image.png'],
   },
 

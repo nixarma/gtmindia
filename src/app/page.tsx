@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { HeroSection }       from '@/components/home/HeroSection'
 import { BlurbSection }      from '@/components/home/BlurbSection'
 import { NextEventSection }  from '@/components/home/NextEventSection'
-import { ProgrammesSection } from '@/components/home/ProgrammesSection'
+import { ProgramsSection } from '@/components/home/ProgramsSection'
 import { PastEventsSection } from '@/components/home/PastEventsSection'
 import { FaqSection }        from '@/components/home/FaqSection'
 import { CtaBannerSection }  from '@/components/home/CtaBannerSection'
@@ -25,7 +25,7 @@ export default function HomePage() {
       <BlurbSection />
       <NextEventSection upcoming={upcoming} />
       <PastEventsSection />
-      <ProgrammesSection />
+      <ProgramsSection />
       <FaqSection />
       <CtaBannerSection />
     </>
