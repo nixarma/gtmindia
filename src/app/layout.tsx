@@ -6,6 +6,9 @@ import { Footer } from '@/components/layout/Footer'
 import { SmoothScrollProvider } from '@/components/ui/SmoothScrollProvider'
 import { defaultMetadata } from '@/lib/metadata'
 import { StructuredData } from '@/components/ui/StructuredData'
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -37,6 +40,8 @@ export default function RootLayout({
         <Nav />
         <main>{children}</main>
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
