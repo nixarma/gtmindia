@@ -30,11 +30,15 @@ export default function AboutPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <PersonCard
               name="Nikhil Sarma"
-              role="Founder, GTM Solutions Consulting"
+              role="Founder, GTM India"
               bio={
                <>
-                <p>I coach teams reporting to CROs, VPs of Sales, and SE leaders at B2B SaaS companies to guide buyers towards confident and timely purchasing decisions.</p>
-                <p> I do this through a deep focus on Value Discovery, Storytelling, Value Demonstration, and Business Acumen.</p>
+                <p>I'm a firm believer that as knowledge workers our learning accelerates outside our company bubbles and few things give me greater joy than bringing GTM professionals together to learn and grow together.</p>
+                <p>I started Germany's longest running Presales meetup in Berlin in 2022, and launched Presales India in March 2024.</p>
+                <p>What started as a 4-person meetup in Hyderabad has now grown into the thriving pan-India community that is now <em style={{ color: 'var(--accent)', fontStyle: 'italic' }}>GTM India.</em></p>
+                <p>I'm thrilled to have had Utkarsh bring his energy into organizing and spreading the word since January 2025. </p>
+                <p>Through <a href="https://www.gtmsolutions.co" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>GTM Solutions Consulting</a>, I coach frontline revenue-generating teams at B2B SaaS companies on guiding buyers towards confident and timely purchasing decisions.</p>
+                <p>I do this through a deep focus on Value Discovery, Storytelling, Value Demonstration, and Business Acumen.</p>
                </> 
               }
               photo="/images/nikhil-headshot.jpg"
@@ -43,7 +47,7 @@ export default function AboutPage() {
             />
             <PersonCard
               name="Utkarsh Banwar"
-              role="Co-organiser, GTM India"
+              role="Community Lead, GTM India"
               bio={
                 <>
                   <p>I currently work at Netscribes as a Senior Manager &ndash; Presales, bringing over 8 years of experience across diverse industries in the presales and GTM space.</p>
@@ -90,7 +94,8 @@ function PersonCard({
         borderRadius: '0.75rem',
         overflow: 'hidden',
         display: 'grid',
-        gridTemplateColumns: 'clamp(180px, 28%, 320px) 1fr',
+        gridTemplateColumns: 'clamp(180px, 25%, 320px) 1fr',
+        alignItems: 'center',
       }}
       className="person-card"
     >
@@ -142,9 +147,22 @@ function PersonCard({
             color: 'var(--accent)',
             textDecoration: 'none',
             fontWeight: 500,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.4rem',
           }}
         >
-          LinkedIn &rarr;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
         </a>
       </div>
     </div>

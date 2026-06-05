@@ -29,11 +29,10 @@ export function CtaBannerSection() {
     <section className="cta-banner">
       <div className="container">
         <h2 className="cta-banner__title">
-          Stay current with <em>GTM India</em>
+          Stay current with <em>what's happening</em>
         </h2>
         <p className="cta-banner__sub">
-          Events, conversations, and ideas from the GTM India community —
-          delivered monthly.
+          Events, conversations, and ideas from the GTM India community. Delivered monthly.
         </p>
         <div ref={mountRef} className="beehiiv-embed" />
       </div>

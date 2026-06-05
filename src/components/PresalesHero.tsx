@@ -24,6 +24,7 @@ export default function PresalesHero() {
             width={900}
             height={600}
             className="psi-hero__image-img"
+            priority
           />
           <p className="psi-hero__image-caption">Hyderabad, March 2024</p>
         </div>
