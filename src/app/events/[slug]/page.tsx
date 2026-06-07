@@ -88,6 +88,7 @@ export default async function EventPage({ params }: Props) {
           {isPast && event.photos && event.photos.length > 0 && (
             <PhotoCarousel
               images={event.photos}
+              crops={['pad']}
               alt={event.title}
               className="event-page__carousel"
             />

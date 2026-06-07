@@ -5,6 +5,7 @@ import { CldImage } from 'next-cloudinary'
 
 interface PhotoCarouselProps {
   images: string[]         // Cloudinary public IDs e.g. ['events/20260606/01']
+  crops?: Array<'auto' | 'fill' | 'pad' | null>  // index-matched; omitted = 'auto'
   alt?: string
   aspectRatio?: string
   className?: string
@@ -12,6 +13,7 @@ interface PhotoCarouselProps {
 
 export default function PhotoCarousel({
   images,
+  crops,
   alt = 'Event photo',
   aspectRatio = 'aspect-[16/10]',
   className = '',
@@ -35,26 +37,31 @@ export default function PhotoCarousel({
   return (
     <div className={`relative w-full overflow-hidden rounded-2xl bg-[#DDDCDB] ${aspectRatio} ${className}`}>
 
-      {images.map((publicId, index) => (
-        <div
-          key={publicId}
-          className="absolute inset-0 transition-opacity duration-500"
-          style={{ opacity: index === current ? 1 : 0 }}
-          aria-hidden={index !== current}
-        >
-          <CldImage
-            src={publicId}
-            alt={`${alt} ${index + 1}`}
-            fill
-            crop={{ type: 'auto', source: true }}
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 90vw"
-            priority={index === 0}
-          />
-        </div>
-      ))}
+      {images.map((publicId, index) => {
+        const cropType = crops?.[index] ?? 'auto'
+        const objectFit = cropType === 'pad' ? 'object-contain' : 'object-cover'
 
-      {/* Only render arrows when there is more than one image */}
+        return (
+          <div
+            key={publicId}
+            className="absolute inset-0 transition-opacity duration-500"
+            style={{ opacity: index === current ? 1 : 0 }}
+            aria-hidden={index !== current}
+          >
+            <CldImage
+              src={publicId}
+              alt={`${alt} ${index + 1}`}
+              fill
+              crop={{ type: cropType, source: true }}
+              className={objectFit}
+              sizes="(max-width: 768px) 100vw, 90vw"
+              priority={index === 0}
+            />
+          </div>
+        )
+      })}
+
+      {/* Only render controls when there is more than one image */}
       {images.length > 1 && (
         <>
           {/* Left arrow */}
@@ -62,13 +69,13 @@ export default function PhotoCarousel({
             onClick={prev}
             aria-label="Previous photo"
             className="
-              group absolute left-4 top-1/2 -translate-y-1/2 z-10
+              group absolute left-3 top-1/2 -translate-y-1/2 z-10
               flex h-9 w-9 items-center justify-center
-              rounded-full bg-white/20 backdrop-blur-sm
-              border border-white/30
+              rounded-full bg-black/40 backdrop-blur-sm
+              border border-black/10
               transition-all duration-200
-              hover:bg-white/40
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60
+              hover:bg-black/60
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40
             "
           >
             <ChevronLeft className="h-4 w-4 text-white transition-transform duration-200 group-hover:-translate-x-0.5" />
@@ -79,30 +86,30 @@ export default function PhotoCarousel({
             onClick={next}
             aria-label="Next photo"
             className="
-              group absolute right-4 top-1/2 -translate-y-1/2 z-10
+              group absolute right-3 top-1/2 -translate-y-1/2 z-10
               flex h-9 w-9 items-center justify-center
-              rounded-full bg-white/20 backdrop-blur-sm
-              border border-white/30
+              rounded-full bg-black/40 backdrop-blur-sm
+              border border-black/10
               transition-all duration-200
-              hover:bg-white/40
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60
+              hover:bg-black/60
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40
             "
           >
             <ChevronRight className="h-4 w-4 text-white transition-transform duration-200 group-hover:translate-x-0.5" />
           </button>
 
           {/* Dot indicators */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex">
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm">
             {images.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrent(index)}
                 aria-label={`Go to photo ${index + 1}`}
-                className="flex items-center justify-center w-6 h-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                className="flex items-center justify-center w-5 h-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
               >
                 <span
                   className="block h-1.5 rounded-full bg-white transition-all duration-300"
-                  style={{ width: index === current ? '20px' : '6px', opacity: index === current ? 1 : 0.5 }}
+                  style={{ width: index === current ? '18px' : '6px', opacity: index === current ? 1 : 0.6 }}
                 />
               </button>
             ))}
