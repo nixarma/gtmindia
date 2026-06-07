@@ -12,15 +12,19 @@ export const metadata = {
 export default async function PresalesIndiaPage() {
   const allEvents = await getAllEvents()
 
-  const upcomingEvents = allEvents.filter(
-    (e) => e.status !== 'past' && new Date(e.date) >= new Date()
-  )
+  const now = new Date()
 
-  const pastPsiEvents = allEvents.filter(
+  const upcomingEvents = allEvents.filter(
+    (e) => new Date(e.date).setHours(23, 59, 59, 999) >= now.getTime()
+  )
+  
+const pastPsiEvents = allEvents
+  .filter(
     (e) =>
       e.community === 'presales-india' &&
-      (e.status === 'past' || new Date(e.date) < new Date())
+      (new Date(e.date).setHours(23,59,59,999) < now.getTime())
   )
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
   return (
     <main>

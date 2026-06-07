@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getAllEvents } from '@/data/events'
+import { getAllEvents } from '@/lib/events'
 import { EventsFilter } from '@/components/events/EventsFilter'
 import { CtaBannerSection } from '@/components/home/CtaBannerSection'
 
@@ -10,10 +10,18 @@ export const metadata: Metadata = {
 
 export default function EventsPage() {
   const all = getAllEvents()
-  const events = all.map((event) => ({
-    event,
-    isPast: event.status === 'past',
-  }))
+  const now = new Date()
+
+  const upcoming = all
+  .filter((e) => new Date(e.date).setHours(23, 59, 59, 999) >= now.getTime())
+  .map((event) => ({ event, isPast: false }))
+
+  const past = all
+    .filter((e) => new Date(e.date).setHours(23, 59, 59, 999) < now.getTime())
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map((event) => ({ event, isPast: true }))
+
+    const events = [...upcoming, ...past]
 
   return (
     <>

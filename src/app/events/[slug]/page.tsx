@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import { getEventBySlug, getAllEvents } from '@/data/events'
+import { getEventBySlug, getAllEvents } from '@/lib/events'
+import type { Event } from '@/types/event'
 import { formatEventDate } from '@/lib/dateUtils'
 import PhotoCarousel from '@/components/ui/PhotoCarousel'
 
@@ -12,7 +13,7 @@ interface Props {
 
 export async function generateStaticParams() {
   const events = getAllEvents()
-  return events.map((e) => ({ slug: e.slug ?? e.id ?? '' }))
+  return events.map((e: Event) => ({ slug: e.slug ?? e.id ?? '' }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -30,7 +31,9 @@ export default async function EventPage({ params }: Props) {
   const event = getEventBySlug(slug)
   if (!event) notFound()
 
-  const isPast = event.status === 'past'
+  const isPast = event.date
+    ? new Date(event.date).setHours(23, 59, 59, 999) < Date.now()
+    : false
   const isVirtual = event.format === 'virtual'
   const hasSpeakers = event.speakers && event.speakers.length > 0 && event.speakers[0].name !== 'TBC'
 
@@ -135,7 +138,7 @@ export default async function EventPage({ params }: Props) {
             <div className="event-page__speakers">
               <h2 className="event-page__section-heading">Speakers</h2>
               <ul className="event-page__speaker-list">
-                {(event.speakers ?? []).map((speaker, i) => (
+                {(event.speakers ?? []).map((speaker: { name: string; role?: string; company?: string; linkedin?: string }, i: number) => (
                   <li key={i} className="event-page__speaker">
                     <div className="event-page__speaker-info">
                       <span className="event-page__speaker-name">{speaker.name}</span>
@@ -165,7 +168,7 @@ export default async function EventPage({ params }: Props) {
           {/* Tags */}
           {event.tags && event.tags.length > 0 && (
             <div className="event-meta">
-              {event.tags.map((tag) => (
+              {event.tags.map((tag: string) => (
                 <span key={tag} className="event-meta__chip">{tag}</span>
               ))}
             </div>

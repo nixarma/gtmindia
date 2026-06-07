@@ -39,12 +39,17 @@ export function getAllEvents(): Event[] {
   })
 
   return events.sort((a, b) => {
-    if (a.status === 'upcoming' && b.status === 'past') return -1
-    if (a.status === 'past' && b.status === 'upcoming') return 1
     const dateA = new Date(a.date).getTime()
     const dateB = new Date(b.date).getTime()
-    return a.status === 'upcoming' ? dateA - dateB : dateB - dateA
+    return dateA - dateB
   })
+}
+
+function isUpcoming(event: Event): boolean {
+  if (!event.date) return true
+  const eventEnd = new Date(event.date)
+  eventEnd.setHours(23, 59, 59, 999)
+  return eventEnd >= new Date()
 }
 
 export function getEventBySlug(slug: string): Event | undefined {
@@ -52,9 +57,11 @@ export function getEventBySlug(slug: string): Event | undefined {
 }
 
 export function getUpcomingEvents(): Event[] {
-  return getAllEvents().filter((e) => e.status === 'upcoming')
+  return getAllEvents().filter(isUpcoming)
 }
 
 export function getPastEvents(): Event[] {
-  return getAllEvents().filter((e) => e.status === 'past')
+  return getAllEvents()
+    .filter((e) => !isUpcoming(e))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
