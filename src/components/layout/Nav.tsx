@@ -10,6 +10,8 @@ const links = [
   { href: '/about',          label: 'About' },
 ]
 
+const WHATSAPP_URL = 'https://chat.whatsapp.com/FZQTMFdJfB9HVW3WywBm38'
+
 export function Nav() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -32,6 +34,14 @@ export function Nav() {
               {label}
             </Link>
           ))}
+          <a
+            href={WHATSAPP_URL}
+            className="nav__link"
+            target="_blank"
+            rel="noopener"
+          >
+            Join on WhatsApp
+          </a>
           <Link href="/events" className="nav__cta">
             See upcoming events
           </Link>
@@ -65,6 +75,15 @@ export function Nav() {
             {label}
           </Link>
         ))}
+        <a
+          href={WHATSAPP_URL}
+          className="nav__link"
+          target="_blank"
+          rel="noopener"
+          onClick={() => setMenuOpen(false)}
+        >
+          Join WhatsApp
+        </a>
         <Link
           href="/events"
           className="nav__cta"
