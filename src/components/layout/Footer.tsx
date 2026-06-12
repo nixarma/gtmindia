@@ -23,6 +23,15 @@ export function Footer() {
               <li><Link href="/events">All events</Link></li>
               <li><Link href="/presales-india">Presales India</Link></li>
               <li><Link href="/about">GTM India</Link></li>
+              <li>
+                <a
+                  href="https://chat.whatsapp.com/FZQTMFdJfB9HVW3WywBm38"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Join the WhatsApp community
+                </a>
+              </li>
             </ul>
           </div>
 
