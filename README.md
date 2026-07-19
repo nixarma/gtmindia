@@ -9,7 +9,7 @@ An initiative by GTM Solutions Consulting (https://gtmsolutions.co).
 - Lenis smooth scroll (desktop only)
 - MDX for event content
 - next-cloudinary for images
-- Vercel (free tier) with daily cron-driven ISR revalidation
+- Vercel (pro tier) with daily cron-driven ISR revalidation
 
 ## Local setup
 
