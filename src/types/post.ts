@@ -1,7 +1,11 @@
 export interface PostAuthor {
+  id?: string
+  slug?: string
   name: string
+  title?: string
   bio?: string
   linkedin?: string
+  headshot?: string
 }
 
 export interface Post {
@@ -13,7 +17,7 @@ export interface Post {
   date: string
   publishedAt?: string
   heroImage?: string        // Cloudinary public ID
-  author: string | string[] | PostAuthor | PostAuthor[]
+  authors: string[] | PostAuthor[]
   tags?: string[]
   content?: string          // raw MDX body
   readTime?: string
