@@ -17,20 +17,17 @@ function formatPostDate(date: string) {
   })
 }
 
-function getAuthorName(author: Post['author']): string {
-  if (typeof author === 'string') return author
-  if (Array.isArray(author)) {
-    return author.map((entry) => (typeof entry === 'string' ? entry : entry.name)).filter(Boolean).join(', ')
-  }
-  if (typeof author === 'object' && author !== null) {
-    return author.name
-  }
-  return 'GTM India'
+function getAuthorName(authors: Post['authors']): string {
+  if (!authors || authors.length === 0) return 'GTM India'
+  return authors
+    .map((entry) => (typeof entry === 'string' ? entry : entry.name))
+    .filter(Boolean)
+    .join(', ')
 }
 
 export function PostCard({ post, featured = false }: PostCardProps) {
   const postUrl = post.slug ? `/blog/${post.slug}` : '/blog'
-  const authorName = getAuthorName(post.author)
+  const authorName = getAuthorName(post.authors)
 
   if (featured) {
     return (
